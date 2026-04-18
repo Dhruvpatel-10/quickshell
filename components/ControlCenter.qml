@@ -9,25 +9,37 @@ import "../services"
 PanelWindow {
     id: root
     visible: Ui.controlCenterOpen
-    anchors { top: true; right: true }
-    margins { top: 8; right: 10 }
-    implicitWidth: Theme.controlCenterWidth + 24
-    implicitHeight: Math.min(body.implicitHeight + 24, 800)
+    anchors { top: true; right: true; left: true; bottom: true }
+    margins { top: Theme.barHeight }
     color: "transparent"
     exclusiveZone: 0
 
     Brightness { id: brightness }
     SystemStats { id: stats }
 
+    // Full-area dismiss layer — any click outside the card closes the drawer.
+    MouseArea {
+        anchors.fill: parent
+        onClicked: Ui.controlCenterOpen = false
+    }
+
     Rectangle {
         id: card
-        anchors.centerIn: parent
+        anchors {
+            top: parent.top
+            right: parent.right
+            topMargin: 8
+            rightMargin: 10
+        }
         width: Theme.controlCenterWidth
         height: body.implicitHeight + Theme.padLg * 2
         color: Theme.card
         radius: 20
         border.color: Theme.border
         border.width: 1
+
+        // Absorb clicks that hit empty card space so they don't close the drawer.
+        MouseArea { anchors.fill: parent }
 
         Column {
             id: body
