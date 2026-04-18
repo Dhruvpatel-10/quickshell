@@ -11,7 +11,7 @@ PanelWindow {
     visible: Ui.controlCenterOpen
     anchors { top: true; right: true; left: true; bottom: true }
     margins { top: Theme.barHeight }
-    color: "#40000000"
+    color: "#01000000"
     exclusiveZone: 0
 
     Brightness { id: brightness }
