@@ -11,7 +11,7 @@ PanelWindow {
     visible: Ui.controlCenterOpen
     anchors { top: true; right: true; left: true; bottom: true }
     margins { top: Theme.barHeight }
-    color: "transparent"
+    color: "#40000000"
     exclusiveZone: 0
 
     Brightness { id: brightness }
@@ -20,8 +20,11 @@ PanelWindow {
     // Full-area dismiss layer — any click outside the card closes the drawer.
     MouseArea {
         anchors.fill: parent
-        onClicked: Ui.controlCenterOpen = false
+        acceptedButtons: Qt.AllButtons
+        hoverEnabled: true
+        onPressed: Ui.controlCenterOpen = false
     }
+
 
     Rectangle {
         id: card
