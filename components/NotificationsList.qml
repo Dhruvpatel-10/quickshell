@@ -1,18 +1,9 @@
 import QtQuick
-import Quickshell.Services.Notifications
 import ".."
 
 Column {
     id: root
     spacing: 8
-
-    NotificationServer {
-        id: server
-        keepOnReload: true
-        bodySupported: true
-        actionsSupported: true
-        imageSupported: true
-    }
 
     Row {
         width: parent.width
@@ -27,7 +18,7 @@ Column {
             id: clearBtn
             width: 72; height: 24; radius: 12
             color: clearMouse.containsMouse ? Theme.tileBgActive : Theme.tileBg
-            visible: server.trackedNotifications.values.length > 0
+            visible: Notifs.trackedNotifications.values.length > 0
             Text {
                 anchors.centerIn: parent
                 text: "Clear All"
@@ -39,17 +30,14 @@ Column {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    const arr = server.trackedNotifications.values.slice()
-                    for (const n of arr) n.dismiss()
-                }
+                onClicked: Notifs.dismissAll()
             }
             Behavior on color { ColorAnimation { duration: 120 } }
         }
     }
 
     Repeater {
-        model: server.trackedNotifications
+        model: Notifs.trackedNotifications
         delegate: NotificationItem {
             required property var modelData
             notification: modelData
@@ -58,7 +46,7 @@ Column {
     }
 
     Text {
-        visible: server.trackedNotifications.values.length === 0
+        visible: Notifs.trackedNotifications.values.length === 0
         text: "No notifications"
         color: Theme.fgMuted
         font { family: Theme.fontSans; pixelSize: Theme.fontSizeSmall }
