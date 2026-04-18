@@ -8,7 +8,7 @@ import "../services"
 
 PanelWindow {
     id: root
-    visible: State.controlCenterOpen
+    visible: Ui.controlCenterOpen
     anchors { top: true; right: true }
     margins { top: 8; right: 10 }
     implicitWidth: Theme.controlCenterWidth + 24
@@ -81,16 +81,16 @@ PanelWindow {
                 ToggleTile {
                     icon: "\uf1f6"
                     label: "Do Not Dist..."
-                    subtitle: State.dndOn ? "On" : "Off"
-                    active: State.dndOn
-                    onClicked: State.dndOn = !State.dndOn
+                    subtitle: Ui.dndOn ? "On" : "Off"
+                    active: Ui.dndOn
+                    onClicked: Ui.dndOn = !Ui.dndOn
                 }
                 ToggleTile {
                     icon: "\uf0f4"
                     label: "Caffeine"
-                    subtitle: State.caffeineOn ? "On" : "Off"
-                    active: State.caffeineOn
-                    onClicked: State.caffeineOn = !State.caffeineOn
+                    subtitle: Ui.caffeineOn ? "On" : "Off"
+                    active: Ui.caffeineOn
+                    onClicked: Ui.caffeineOn = !Ui.caffeineOn
                 }
             }
 

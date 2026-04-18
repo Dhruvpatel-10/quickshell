@@ -5,7 +5,7 @@ import "./components"
 ShellRoot {
     Variants {
         model: Quickshell.screens
-        Bar { screen: modelData }
+        Bar {}
     }
     ControlCenter {}
 }

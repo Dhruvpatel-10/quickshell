@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import ".."
 
 Rectangle {
@@ -13,11 +14,10 @@ Rectangle {
     height: 28
     implicitWidth: row.implicitWidth + padding * 2
 
-    Row {
+    RowLayout {
         id: row
         anchors.centerIn: parent
         spacing: root.spacing
-        verticalItemAlignment: Qt.AlignVCenter
     }
 
     MouseArea {
