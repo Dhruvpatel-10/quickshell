@@ -35,7 +35,7 @@ Rectangle {
                 anchors.centerIn: parent
                 text: "\uf0f3"
                 color: Theme.bgAlt
-                font { family: Theme.fontSans; pixelSize: 14 }
+                font { family: Theme.fontMono; pixelSize: 14 }
             }
         }
 

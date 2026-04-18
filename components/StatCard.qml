@@ -26,7 +26,7 @@ Rectangle {
             Text {
                 text: root.icon
                 color: Theme.fg
-                font { family: Theme.fontSans; pixelSize: 12 }
+                font { family: Theme.fontMono; pixelSize: 12 }
                 anchors.verticalCenter: parent.verticalCenter
             }
             Text {

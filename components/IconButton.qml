@@ -17,7 +17,7 @@ Rectangle {
         anchors.centerIn: parent
         text: root.icon
         color: root.iconColor
-        font { family: Theme.fontSans; pixelSize: root.iconSize }
+        font { family: Theme.fontMono; pixelSize: root.iconSize }
     }
 
     MouseArea {

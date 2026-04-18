@@ -23,7 +23,7 @@ Item {
                 anchors.centerIn: parent
                 text: root.icon
                 color: Theme.fg
-                font { family: Theme.fontSans; pixelSize: 16 }
+                font { family: Theme.fontMono; pixelSize: 16 }
             }
         }
 
