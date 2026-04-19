@@ -1,7 +1,10 @@
+pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
 
+// Net — current wifi SSID, polled every 5s via nmcli. One instance per
+// shell; the bar pill and anything else that wants it read this directly.
 QtObject {
     id: root
     property string ssid: ""

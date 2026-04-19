@@ -6,6 +6,14 @@ Rectangle {
     id: root
     required property Notification notification
 
+    function defaultAction() {
+        const appName = notification.appName
+        const appIcon = notification.appIcon
+        const body = notification.body
+        notification.dismiss()
+        Notifs.invokeDefault(appName, appIcon, body)
+    }
+
     implicitHeight: Math.max(58, col.implicitHeight + 20)
     color: Theme.card
     radius: Theme.radiusTile
@@ -35,7 +43,7 @@ Rectangle {
                 anchors.centerIn: parent
                 text: "\uf0f3"
                 color: Theme.bgAlt
-                font { family: Theme.fontMono; pixelSize: 14 }
+                font { family: Theme.fontMono; pixelSize: Theme.fontLabel }
             }
         }
 
@@ -47,7 +55,7 @@ Rectangle {
             Text {
                 text: root.notification.summary
                 color: Theme.fg
-                font { family: Theme.fontSans; pixelSize: Theme.fontSize; weight: Font.DemiBold }
+                font { family: Theme.fontSans; pixelSize: Theme.fontBody; weight: Font.DemiBold }
                 elide: Text.ElideRight
                 width: parent.width
             }
@@ -55,7 +63,7 @@ Rectangle {
                 visible: text.length > 0
                 text: root.notification.body
                 color: Theme.fgMuted
-                font { family: Theme.fontSans; pixelSize: Theme.fontSizeSmall }
+                font { family: Theme.fontSans; pixelSize: Theme.fontCaption }
                 wrapMode: Text.WordWrap
                 maximumLineCount: 3
                 elide: Text.ElideRight
@@ -64,7 +72,7 @@ Rectangle {
             Text {
                 text: root.notification.appName
                 color: Theme.fgDim
-                font { family: Theme.fontSans; pixelSize: Theme.fontSizeSmall }
+                font { family: Theme.fontSans; pixelSize: Theme.fontCaption }
                 width: parent.width
                 elide: Text.ElideRight
             }
@@ -81,8 +89,17 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
+        // Exclude the X button region so clicks on X don't also trigger the
+        // default action (e.g. accidentally launching satty on dismiss).
+        anchors.rightMargin: 36
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
-        onClicked: root.notification.dismiss()
+        onClicked: (mouse) => {
+            if (mouse.modifiers & Qt.MetaModifier) {
+                root.notification.dismiss()
+            } else {
+                root.defaultAction()
+            }
+        }
     }
 }

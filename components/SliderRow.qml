@@ -7,7 +7,9 @@ Item {
     property string icon: ""
     property real value: 0
     property int percent: Math.round(value * 100)
+    property real scrollStep: 0.05
     signal moved(real v)
+    signal rightClicked()
 
     implicitHeight: 36
 
@@ -23,7 +25,7 @@ Item {
                 anchors.centerIn: parent
                 text: root.icon
                 color: Theme.fg
-                font { family: Theme.fontMono; pixelSize: 16 }
+                font { family: Theme.fontMono; pixelSize: Theme.fontTitle }
             }
         }
 
@@ -51,6 +53,21 @@ Item {
                 }
             }
             handle: Item {}
+
+            WheelHandler {
+                acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+                onWheel: event => {
+                    const delta = event.angleDelta.y > 0 ? root.scrollStep : -root.scrollStep
+                    const next = Math.max(0, Math.min(1, slider.value + delta))
+                    slider.value = next
+                    root.moved(next)
+                }
+            }
+
+            TapHandler {
+                acceptedButtons: Qt.RightButton
+                onTapped: root.rightClicked()
+            }
         }
 
         Text {
@@ -58,7 +75,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             text: root.percent + "%"
             color: Theme.fg
-            font { family: Theme.fontSans; pixelSize: Theme.fontSize; weight: Font.Medium }
+            font { family: Theme.fontSans; pixelSize: Theme.fontBody; weight: Font.Medium }
             horizontalAlignment: Text.AlignRight
         }
     }

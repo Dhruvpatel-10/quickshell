@@ -13,9 +13,16 @@ Rectangle {
     implicitHeight: 66
     implicitWidth: wide ? 372 : 180
     radius: Theme.radiusTile
-    color: mouse.containsMouse ? Qt.lighter(tileColor, 1.08) : tileColor
+    color: tileColor
+    clip: true
 
     readonly property color tileColor: active ? "#2a2d38" : Theme.tileBg
+
+    StateLayer {
+        anchors.fill: parent
+        source: mouse
+        tint: Theme.fg
+    }
 
     Row {
         anchors {
@@ -36,7 +43,7 @@ Rectangle {
                 anchors.centerIn: parent
                 text: root.icon
                 color: active ? Theme.bgAlt : Theme.fg
-                font { family: Theme.fontMono; pixelSize: 16 }
+                font { family: Theme.fontMono; pixelSize: Theme.fontTitle }
             }
         }
 
@@ -46,14 +53,14 @@ Rectangle {
             Text {
                 text: root.label
                 color: Theme.fg
-                font { family: Theme.fontSans; pixelSize: Theme.fontSize; weight: Font.DemiBold }
+                font { family: Theme.fontSans; pixelSize: Theme.fontBody; weight: Font.DemiBold }
                 elide: Text.ElideRight
             }
             Text {
                 visible: root.subtitle.length > 0
                 text: root.subtitle
                 color: Theme.fgMuted
-                font { family: Theme.fontSans; pixelSize: Theme.fontSizeSmall }
+                font { family: Theme.fontSans; pixelSize: Theme.fontCaption }
                 elide: Text.ElideRight
             }
         }

@@ -53,14 +53,17 @@ Rectangle {
 
         Row {
             width: 108
+            height: 40   // match the largest child so verticalCenter has room
             anchors.verticalCenter: parent.verticalCenter
             spacing: 4
 
             IconButton {
+                anchors.verticalCenter: parent.verticalCenter
                 icon: "\uf048"; iconSize: 11
                 onClicked: root.player?.previous()
             }
             IconButton {
+                anchors.verticalCenter: parent.verticalCenter
                 width: 40; height: 40; radius: 20
                 color: Theme.fg
                 iconColor: Theme.bgAlt
@@ -69,6 +72,7 @@ Rectangle {
                 onClicked: root.player?.togglePlaying()
             }
             IconButton {
+                anchors.verticalCenter: parent.verticalCenter
                 icon: "\uf051"; iconSize: 11
                 onClicked: root.player?.next()
             }

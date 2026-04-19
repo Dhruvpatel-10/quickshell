@@ -11,7 +11,14 @@ Rectangle {
     width: 32
     height: 32
     radius: 16
-    color: mouseArea.containsMouse ? Theme.tileBgActive : Theme.tileBg
+    color: Theme.tileBg
+    clip: true
+
+    StateLayer {
+        anchors.fill: parent
+        source: mouseArea
+        tint: Theme.fg
+    }
 
     Text {
         anchors.centerIn: parent
@@ -27,6 +34,4 @@ Rectangle {
         cursorShape: Qt.PointingHandCursor
         onClicked: root.clicked()
     }
-
-    Behavior on color { ColorAnimation { duration: 120 } }
 }

@@ -8,11 +8,19 @@ Rectangle {
     property int padding: Theme.pad
     property int spacing: 8
     signal clicked()
+    signal scrolled(int delta)
 
-    color: mouseArea.containsMouse ? Theme.tileBg : Theme.pillBg
+    color: Theme.pillBg
     radius: Theme.radiusPill
     height: 28
     implicitWidth: row.implicitWidth + padding * 2
+    clip: true
+
+    StateLayer {
+        anchors.fill: parent
+        source: mouseArea
+        tint: Theme.fg
+    }
 
     RowLayout {
         id: row
@@ -26,7 +34,9 @@ Rectangle {
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         onClicked: root.clicked()
+        onWheel: event => {
+            root.scrolled(event.angleDelta.y > 0 ? 1 : -1)
+            event.accepted = true
+        }
     }
-
-    Behavior on color { ColorAnimation { duration: 120 } }
 }

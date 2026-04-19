@@ -1,7 +1,10 @@
+pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
 
+// Bt — connected-device name + adapter power, polled every 5s. Covers the
+// bar pill and control-center. One instance per shell.
 QtObject {
     id: root
     property string device: ""

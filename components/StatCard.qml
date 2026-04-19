@@ -25,14 +25,19 @@ Rectangle {
             spacing: 6
             Text {
                 text: root.icon
-                color: Theme.fg
-                font { family: Theme.fontMono; pixelSize: 12 }
+                color: Theme.fgMuted
+                font { family: Theme.fontMono; pixelSize: Theme.fontCaption }
                 anchors.verticalCenter: parent.verticalCenter
             }
             Text {
                 text: root.percent + "%"
                 color: Theme.fg
-                font { family: Theme.fontSans; pixelSize: 14; weight: Font.DemiBold }
+                font {
+                    family: Theme.fontSans
+                    pixelSize: Theme.fontTitle
+                    weight: Font.DemiBold
+                    features: { "tnum": 1 }
+                }
                 anchors.verticalCenter: parent.verticalCenter
             }
         }
@@ -55,8 +60,14 @@ Rectangle {
 
         Text {
             text: root.label
-            color: Theme.fgMuted
-            font { family: Theme.fontSans; pixelSize: Theme.fontSizeSmall }
+            color: Theme.fgDim
+            font {
+                family: Theme.fontSans
+                pixelSize: Theme.fontCaption
+                letterSpacing: 0.6
+                capitalization: Font.AllUppercase
+                weight: Font.Medium
+            }
         }
     }
 }
